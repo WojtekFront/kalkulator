@@ -2,8 +2,6 @@ window.addEventListener("DOMContentLoaded", init);
 const but = ["*", "/", "+","-","9","8","7","6","5","4","3","2","1","0"];
 const butSpec = ["*", "/", "+","-"];
 
-
-
 function init(){
     document.title = "Title in JavaScript";
 
@@ -31,8 +29,10 @@ function init(){
     content.appendChild(butContent);
 
     but.forEach(function(value){
-        butCre(value);
+        butCre(value, readFun);
+       // console.log(value);
     })
+
 
     function butCre(txt, myFunction){
         let btn = document.createElement("button");
@@ -48,7 +48,10 @@ function init(){
 
 
     }
-
-
+    function readFun(e){
+        console.log(e.target.val);
+        let char = e.target.val;
+        screenCre.value+=char;
+    }
 
 }
