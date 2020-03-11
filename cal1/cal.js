@@ -1,10 +1,11 @@
 window.addEventListener("DOMContentLoaded", init);
-const but = ["*", "/", "+","-","9","8","7","6","5","4","3","2","1","0"];
+const but = ["*", "/", "+","-","9","8","7","6","5","4","3","2","1","0","."];
 const butSpec = ["*", "/", "+","-"];
 
 function init(){
     document.title = "Title in JavaScript";
-
+    let dec = false;
+    let eva = false;
     const content = document.createElement("div");
     content.classList.add("content");
     content.style.maxWidth ="550px";
@@ -33,6 +34,23 @@ function init(){
        // console.log(value);
     })
 
+    butCre("=",evalScreen);
+    butCre("C",clrScreen);
+
+    function evalScreen(){
+        screenCre.style.border="black 1px solid";
+       if(screenCre == "")
+       {screenCre.style.border="red 1px solid"}
+       else{
+           screenCre.value=eval(screenCre.value);
+       }
+    }
+
+    function clrScreen(){
+        screenCre.style.border="black 1px solid";
+        screenCre.value="";
+    
+    }
 
     function butCre(txt, myFunction){
         let btn = document.createElement("button");
@@ -49,9 +67,24 @@ function init(){
 
     }
     function readFun(e){
-        console.log(e.target.val);
+       // console.log(e.target.val);
+        screenCre.style.border = "black 1px solid";
         let char = e.target.val;
+        
+        if(char == "."){
+            if(dec){
+                char = "";
+                screenCre.style.border = "red 1px solid";
+            }
+            else{
+                dec = true;
+            }
+        }
+        eva = butSpec.includes(char);
+        if(eva){
+            dec = false;
+        }
         screenCre.value+=char;
     }
-
+    
 }
